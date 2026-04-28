@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kenyon Acton – Systems Thinker · Data Scientist · Multilingual Analyst</title>
+  <meta name="description" content="Kenyon Acton — data scientist and systems thinker with experience in compliance analytics, multilingual data systems, LED installation design, and creative technology." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; background: #F5F1EB; color: #2A2A28; }
+    ::selection { background: rgba(92,124,92,0.2); }
+    #root { min-height: 100vh; }
+    @media (max-width: 768px) { .nav-desktop { display: none !important; } .nav-mobile-btn { display: block !important; } }
+    @media (min-width: 769px) { .nav-mobile-btn { display: none !important; } .nav-mobile-menu { display: none !important; } }
+    input:focus, textarea:focus { border-color: #5C7C5C !important; box-shadow: 0 0 0 3px rgba(92,124,92,0.09); outline: none; }
+    button:hover { opacity: 0.9; }
+    a:hover { opacity: 0.85; }
+    a { color: #5C7C5C; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+    const C = {
+      bg: "#F5F1EB", bgAlt: "#EDE8E0", primary: "#5C7C5C", primaryDark: "#3D5A3D",
+      accent: "#C4865A", accentLight: "#D4A07A", text: "#2A2A28", textMuted: "#6B6860",
+      textLight: "#8A8578", card: "#FFFFFF", border: "#DDD8D0", muted: "#B8B2A8",
+    };
+    const H = "'Outfit', sans-serif";
+
+    function useInView(t = 0.15) {
+      const ref = useRef(null); const [v, setV] = useState(false);
+      useEffect(() => { const el = ref.current; if (!el) return; const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setV(true); obs.unobserve(el); } }, { threshold: t }); obs.observe(el); return () => obs.disconnect(); }, [t]);
+      return [ref, v];
+    }
+    function FadeIn({ children, delay = 0 }) {
+      const [ref, v] = useInView();
+      return (<div ref={ref} style={{ opacity: v ? 1 : 0, transform: v ? "translateY(0)" : "translateY(24px)", transition: `opacity 0.7s ease ${delay}s, transform 0.7s ease ${delay}s` }}>{children}</div>);
+    }
+    function Tag({ children, muted: m }) {
+      return <span style={{ fontSize: 11, fontWeight: 500, padding: "3px 10px", borderRadius: 20, background: m ? `${C.muted}18` : `${C.primary}12`, color: m ? C.textLight : C.primary }}>{children}</span>;
+    }
+    function SectionLabel({ children }) {
+      return <p style={{ fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", color: C.primary, fontWeight: 600, marginBottom: 8 }}>{children}</p>;
+    }
+    function SectionTitle({ children }) {
+      return <h2 style={{ fontFamily: H, fontSize: "clamp(28px, 4vw, 38px)", color: C.text, fontWeight: 600 }}>{children}</h2>;
+    }
+
+    /* ─── NAV ─── */
+    function Nav({ active }) {
+      const [open, setOpen] = useState(false);
+      const links = ["About", "Experience", "Projects", "Creative", "Skills", "Education", "Contact"];
+      const go = (id) => { document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior: "smooth" }); setOpen(false); };
+      return (
+        <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: C.bg + "EE", backdropFilter: "blur(12px)", borderBottom: `1px solid ${C.border}` }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 60 }}>
+            <button onClick={() => go("hero")} style={{ all: "unset", cursor: "pointer", fontFamily: H, fontWeight: 600, fontSize: 20, color: C.primaryDark }}>K.A.</button>
+            <div style={{ display: "flex", gap: 28 }} className="nav-desktop">
+              {links.map(l => <button key={l} onClick={() => go(l)} style={{ all: "unset", cursor: "pointer", fontSize: 13, fontWeight: 500, color: active === l.toLowerCase() ? C.primary : C.textMuted, borderBottom: active === l.toLowerCase() ? `2px solid ${C.primary}` : "2px solid transparent", paddingBottom: 2, transition: "all 0.3s", letterSpacing: "0.03em" }}>{l}</button>)}
+            </div>
+            <button onClick={() => setOpen(!open)} className="nav-mobile-btn" style={{ all: "unset", cursor: "pointer", padding: 8, display: "none" }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={C.text} strokeWidth="2">{open ? <path d="M18 6L6 18M6 6l12 12" /> : <><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="18" x2="21" y2="18" /></>}</svg>
+            </button>
+          </div>
+          {open && <div className="nav-mobile-menu" style={{ padding: "8px 24px 16px", display: "flex", flexDirection: "column", gap: 12, background: C.bg }}>{links.map(l => <button key={l} onClick={() => go(l)} style={{ all: "unset", cursor: "pointer", fontSize: 15, padding: "6px 0", color: C.textMuted, fontWeight: 500 }}>{l}</button>)}</div>}
+        </nav>
+      );
+    }
+
+    /* ─── HERO ─── */
+    function Hero() {
+      const go = (id) => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      return (
+        <section id="hero" style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "100px 24px 60px", position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0, opacity: 0.035 }}>{Array.from({ length: 12 }).map((_, i) => <div key={i} style={{ position: "absolute", left: `${(i % 4) * 28 + 5}%`, top: `${Math.floor(i / 4) * 35 + 8}%`, width: 60 + (i % 3) * 30, height: 60 + (i % 3) * 30, borderRadius: "50%", border: `1px solid ${C.primary}` }} />)}</div>
+          <div style={{ maxWidth: 900, width: "100%", textAlign: "center", position: "relative", zIndex: 1 }}>
+            <FadeIn>
+              <div style={{ width: 150, height: 150, borderRadius: "50%", margin: "0 auto 28px", background: `linear-gradient(135deg, ${C.primary}22, ${C.accent}22)`, border: `3px solid ${C.primary}33`, display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke={C.primary} strokeWidth="1.2" opacity={0.5}><circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" /></svg>
+              </div>
+            </FadeIn>
+            <FadeIn delay={0.1}><p style={{ fontSize: 13, letterSpacing: "0.18em", textTransform: "uppercase", color: C.primary, fontWeight: 600, marginBottom: 12 }}>Systems Thinker · Data Scientist · Multilingual Analyst</p></FadeIn>
+            <FadeIn delay={0.2}><h1 style={{ fontFamily: H, fontSize: "clamp(40px, 7vw, 72px)", fontWeight: 700, color: C.text, lineHeight: 1.1, margin: "0 0 24px" }}>Kenyon Acton</h1></FadeIn>
+            <FadeIn delay={0.3}>
+              <p style={{ fontSize: "clamp(16px, 2.5vw, 19px)", color: C.textMuted, lineHeight: 1.7, maxWidth: 680, margin: "0 auto 36px" }}>
+                I work at the intersection of data, language, and complex systems — from compliance analytics and multilingual datasets to large-scale LED installations and international tours. I help organizations see how the pieces connect and build the tools to act on it.
+              </p>
+            </FadeIn>
+            <FadeIn delay={0.4}>
+              <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+                <button onClick={() => go("projects")} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 600, padding: "13px 30px", borderRadius: 8, border: "none", cursor: "pointer", background: C.primary, color: "#fff" }}>View Projects</button>
+                <button onClick={() => go("contact")} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 600, padding: "13px 30px", borderRadius: 8, cursor: "pointer", background: "transparent", color: C.primary, border: `2px solid ${C.primary}` }}>Contact</button>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+      );
+    }
+
+    /* ─── ABOUT ─── */
+    function About() {
+      const langs = [
+        { lang: "English", level: "Native", pct: 100 }, { lang: "Spanish", level: "Fluent", pct: 95 },
+        { lang: "Portuguese", level: "Working", pct: 50 }, { lang: "Italian", level: "Working", pct: 45 },
+        { lang: "French", level: "Working", pct: 40 }, { lang: "German", level: "Working", pct: 35 },
+      ];
+      return (
+        <section id="about" style={{ padding: "100px 24px", background: C.bgAlt }}>
+          <div style={{ maxWidth: 960, margin: "0 auto" }}>
+            <FadeIn><SectionLabel>About</SectionLabel><SectionTitle>Who I Am</SectionTitle></FadeIn>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 40, marginTop: 32 }}>
+              <FadeIn delay={0.1}>
+                <div>
+                  <p style={{ fontSize: 15, color: C.textMuted, lineHeight: 1.8, marginBottom: 16 }}>
+                    I'm a data scientist who thinks in systems. My career has been shaped by environments where no single dataset, discipline, or language tells the whole story — from directing LED installation teams of 10–50 people across international tours, to navigating payment ecosystems and regulatory frameworks at LegitScript, to teaching bilingual workshops and coaching ESL students.
+                  </p>
+                  <p style={{ fontSize: 15, color: C.textMuted, lineHeight: 1.8, marginBottom: 16 }}>
+                    At LegitScript, I spent four years working across brand monitoring, fraud detection, and legal compliance research for food and drug ingredients — analyzing data from multiple client contracts, regulatory domains, and 20+ language datasets simultaneously. Before that, I spent five years at Light At Play directing production of interactive LED sculptures, coordinating logistics for national and international tours, and contributing algorithms research using JavaScript and Arduino.
+                  </p>
+                  <p style={{ fontSize: 15, color: C.textMuted, lineHeight: 1.8, marginBottom: 16 }}>
+                    As a Qualified Oregon Health Care Interpreter (Spanish/English) and Wilderness First Responder, I bring something most data practitioners don't: an understanding that data serves people, that systems need to work across cultures and languages, and that leadership means showing up in the field — not just behind a screen.
+                  </p>
+                  <p style={{ fontSize: 15, color: C.textMuted, lineHeight: 1.8 }}>
+                    I'm currently upskilling in AI through the <a href="https://suresh-srinivas.github.io/skill-forward/" target="_blank" rel="noopener noreferrer">Skill Forward</a> bootcamp, building deployed AI solutions and expanding my portfolio. I'm seeking roles in GRC implementation, data governance, compliance analytics, and international program delivery.
+                  </p>
+                </div>
+              </FadeIn>
+              <FadeIn delay={0.2}>
+                <div>
+                  <p style={{ fontSize: 13, fontWeight: 600, color: C.text, marginBottom: 16, letterSpacing: "0.05em", textTransform: "uppercase" }}>Language Proficiency</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 12, marginBottom: 28 }}>
+                    {langs.map(({ lang, level, pct }) => (
+                      <div key={lang}>
+                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 5 }}>
+                          <span style={{ fontSize: 14, color: C.text, fontWeight: 500 }}>{lang}</span>
+                          <span style={{ fontSize: 12, color: C.textLight }}>{level}</span>
+                        </div>
+                        <div style={{ height: 6, borderRadius: 3, background: `${C.primary}18` }}>
+                          <div style={{ height: "100%", borderRadius: 3, background: `linear-gradient(90deg, ${C.primary}, ${C.accent})`, width: `${pct}%`, transition: "width 1.2s ease" }} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ background: `${C.primary}0A`, borderLeft: `3px solid ${C.primary}`, borderRadius: "0 8px 8px 0", padding: "16px 20px" }}>
+                    <p style={{ fontSize: 13, fontWeight: 600, color: C.primary, marginBottom: 6 }}>Why this matters</p>
+                    <p style={{ fontSize: 13, color: C.textMuted, lineHeight: 1.6 }}>
+                      Compliance and data governance are global problems. Being able to evaluate multilingual content, communicate across cultures, and understand regulatory nuance in context isn't a nice-to-have — it's a core analytical capability.
+                    </p>
+                  </div>
+                </div>
+              </FadeIn>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ─── EXPERIENCE ─── */
+    function Experience() {
+      const jobs = [
+        { title: "Skill Forward AI Bootcamp", company: "Escape With Velocity", period: "2025 – Present", desc: "Hands-on AI upskilling bootcamp building deployed solutions with modern AI tools, frameworks, and mentorship.", items: ["Building and deploying AI-powered solutions as portfolio artifacts", "Working with LLMs, automation tools, and practical AI frameworks", "Developing proof-of-work portfolio with public demos and documentation"] },
+        { title: "Junior Data Scientist", company: "LegitScript", period: "Sep 2022 – Jun 2023", desc: "Internet and payments compliance — monitoring merchants, platforms, and payment ecosystems for fraud, illegal goods, and regulatory noncompliance across global markets.", items: ["Created dashboards and pipelines with Databricks, Python, SQL, and PySpark", "Increased efficiency through EDA, ETL, data migration, verification, and model development", "Developed machine learning classification models and analysis tools", "Maintained and established data documentation and protocols", "Utilized NLP and web scraping to source and analyze data"] },
+        { title: "Data Analyst — Spanish Language Specialist", company: "LegitScript", period: "Jul 2019 – Sep 2022", desc: null, items: ["Developed data pipelines and reports using Python, Excel, SQL, and Google Workspace", "Updated client guides with region-specific legislative changes", "Worked with multilingual datasets across 20+ languages, with specific projects in Spanish, Italian, English, Portuguese, French, and German", "Analyzed fraud and payments data", "Implemented translation tools to streamline workflow", "Performed compliance and risk analysis, and multilingual investigative analysis and report writing"] },
+        { title: "Contract Data Analyst", company: "Deciding Vote", period: "Nov 2018 – Jul 2019", desc: null, items: ["Created data analysis reports and visualizations with Python, Matplotlib, MySQL", "Conducted A/B testing, research, time series analysis, and presented results", "Performed EDA, data cleaning, tracking, and organization", "Utilized email marketing experience to analyze user engagement", "Prepared JSON config files"] },
+        { title: "Teaching Artist and Actor", company: "Teatro Milagro", period: "Jul 2017 – May 2018", desc: null, items: ["Increased newsletter engagement by 20% through writing, editing, media, and marketing analysis", "Led bilingual workshops on acting, identity, and writing for all ages — elementary through university", "Managed and developed promotional media and translations", "Taught and performed nationally in 80+ residencies and performances"] },
+        { title: "Contract Design and Project Management", company: "Light At Play", period: "Sep 2013 – Jul 2018", desc: "Design studio creating interactive LED sculptures for festivals, conferences, and international exhibitions.", items: ["Directed production and installation of interactive LED sculptures with teams of 10–50 people", "Developed prototypes, sourced materials, and coordinated logistics for national and international tours", "Contributed algorithms research, design elements, and visualizations", "Developed branding content", "Environment: JavaScript, Adobe Illustrator, Arduino"] },
+        { title: "¡Pilas! Family Program Assistant & ESL Instructor", company: "Downtown Languages", period: "Sep 2011 – Jan 2015", desc: null, items: ["Implemented data tracking tools", "Designed and maintained website and gallery with WordPress", "Prepared students with speech coaching", "Represented Downtown Languages with bilingual recruitment and outreach; delivered presentations at events"] },
+        { title: "NSF Plant Genome Research Project Intern", company: "Comstock Lab, Boyce Thompson Institute, Cornell University", period: "Jun – Aug 2005", desc: null, items: ["Performed ANOVA testing to isolate genes promoting drought resistance", "Presented research and data visualizations at Cornell University seminar", "Completed weekly research ethics training series"] },
+      ];
+      return (
+        <section id="experience" style={{ padding: "100px 24px", background: C.bg }}>
+          <div style={{ maxWidth: 820, margin: "0 auto" }}>
+            <FadeIn>
+              <SectionLabel>Experience</SectionLabel>
+              <SectionTitle>Where I've Worked</SectionTitle>
+              <p style={{ fontSize: 15, color: C.textMuted, marginBottom: 48, marginTop: 12, maxWidth: 620 }}>
+                From NSF research labs to international LED tours to global compliance systems — each role built on the last, connecting disciplines most people keep separate.
+              </p>
+            </FadeIn>
+            <div style={{ position: "relative", paddingLeft: 28 }}>
+              <div style={{ position: "absolute", left: 5, top: 8, bottom: 8, width: 2, background: `linear-gradient(to bottom, ${C.primary}, ${C.accent}40)`, borderRadius: 1 }} />
+              {jobs.map((job, i) => (
+                <FadeIn key={i} delay={i * 0.06}>
+                  <div style={{ marginBottom: 40, position: "relative" }}>
+                    <div style={{ position: "absolute", left: -25, top: 6, width: 12, height: 12, borderRadius: "50%", background: C.bg, border: `3px solid ${C.primary}` }} />
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 8, marginBottom: 6 }}>
+                      <h3 style={{ fontFamily: H, fontSize: 18, fontWeight: 600, color: C.text, margin: 0 }}>{job.title}</h3>
+                      <span style={{ fontSize: 13, color: C.textLight, whiteSpace: "nowrap" }}>{job.period}</span>
+                    </div>
+                    <p style={{ fontSize: 14, color: C.accent, fontWeight: 600, marginBottom: job.desc ? 6 : 10 }}>{job.company}</p>
+                    {job.desc && <p style={{ fontSize: 13, color: C.textLight, lineHeight: 1.6, marginBottom: 12, fontStyle: "italic" }}>{job.desc}</p>}
+                    <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
+                      {job.items.map((item, j) => <p key={j} style={{ fontSize: 14, color: C.textMuted, lineHeight: 1.6, margin: 0, paddingLeft: 14, position: "relative" }}><span style={{ position: "absolute", left: 0, color: C.primary }}>·</span>{item}</p>)}
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ─── PROJECTS ─── */
+    function ProjectCard({ project, muted: m = false }) {
+      const [ex, setEx] = useState(false);
+      return (
+        <div onClick={() => !m && setEx(!ex)} style={{ background: m ? C.card + "AA" : C.card, borderRadius: 12, padding: 24, border: `1px solid ${m ? C.border + "88" : C.border}`, cursor: m ? "default" : "pointer", transition: "all 0.3s", opacity: m ? 0.7 : 1, position: "relative", overflow: "hidden" }}>
+          {m && <span style={{ position: "absolute", top: 14, right: 14, fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.12em", padding: "4px 10px", borderRadius: 20, background: `${C.accent}18`, color: C.accent }}>Coming Soon</span>}
+          <h3 style={{ fontFamily: H, fontSize: 17, fontWeight: 600, color: m ? C.textLight : C.text, marginBottom: 8 }}>{project.title}</h3>
+          <p style={{ fontSize: 13, color: C.textMuted, lineHeight: 1.6, marginBottom: 12 }}>{project.challenge}</p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: ex ? 16 : 0 }}>
+            {project.tech.map(t => <Tag key={t} muted={m}>{t}</Tag>)}
+          </div>
+          {ex && !m && (
+            <div style={{ marginTop: 12, paddingTop: 12, borderTop: `1px solid ${C.border}` }}>
+              {project.solution && <p style={{ fontSize: 13, color: C.textMuted, lineHeight: 1.6, marginBottom: 8 }}><strong style={{ color: C.text }}>Approach:</strong> {project.solution}</p>}
+              {project.impact && <p style={{ fontSize: 13, color: C.primary, fontWeight: 600 }}>{project.impact}</p>}
+            </div>
+          )}
+          {!m && <p style={{ fontSize: 12, color: C.textLight, marginTop: 8 }}>{ex ? "Click to collapse" : "Click to expand"}</p>}
+        </div>
+      );
+    }
+    function Projects() {
+      const completed = [
+        { title: "Fraud Detection Classification Model", challenge: "Fraudulent merchant websites required labor-intensive manual review. The volume of content across languages and markets made scaling human review unsustainable.", solution: "Developed a prototype classification model as part of graduate research at Regis University, using data and domain knowledge from LegitScript. Designed for human-in-the-loop workflows — flagging potentially fraudulent sites for analyst review rather than replacing human judgment. Proof of concept stage.", tech: ["Python", "NLP", "Databricks", "PySpark"], impact: "Graduate capstone demonstrating feasibility of ML-assisted fraud detection in multilingual compliance contexts" },
+        { title: "Campaign Analytics Dashboard", challenge: "Democratic campaigns needed to track voter engagement and A/B test results across districts and demographics.", solution: "Created interactive dashboard combining time series analysis with voter engagement metrics using Python, Matplotlib, and MySQL. Presented results to campaign staff.", tech: ["Python", "SQL", "Matplotlib", "MySQL"], impact: "Informed campaign strategy decisions with quantitative voter engagement analysis" },
+        { title: "Bilingual Community Engagement Program", challenge: "Teatro Milagro needed to increase engagement with Spanish-speaking families through culturally resonant outreach, not just translated English materials.", solution: "Developed bilingual marketing materials, workshops, and a data-driven content strategy that treated Spanish-language outreach as primary content, not translation.", tech: ["Mailchimp", "Adobe Creative Suite", "Analytics"], impact: "20% increase in newsletter engagement" },
+        { title: "Radiance Orb — Interactive LED Sculpture", challenge: "Create a large-scale, interactive geodesic LED installation capable of touring nationally and internationally.", solution: "Directed production and installation with teams of 10–50 people. Developed prototypes, sourced materials, contributed algorithms research for LED programming using JavaScript and Arduino. Coordinated logistics for tours including TEDx Portland and the UNESCO International Year of Light Opening Ceremony in Paris.", tech: ["JavaScript", "Arduino", "LED", "Project Management"], impact: "Featured at TEDx Portland (2017), UNESCO Paris (2015), winner of Just Imagine Award (2013)" },
+      ];
+      const upcoming = [
+        { title: "GRC Compliance Assistant", challenge: "AI-powered tool for regulatory documentation and compliance workflow automation.", tech: ["Python", "LLM", "RAG", "GRC"] },
+        { title: "Multilingual Data Quality Analyzer", challenge: "NLP tool for automated metadata validation across languages and regulatory frameworks.", tech: ["NLP", "Python", "Snowflake"] },
+        { title: "Campaign Analytics AI Agent", challenge: "Automated voter engagement insights using agentic AI workflows.", tech: ["LangChain", "Python", "SQL"] },
+        { title: "Healthcare Interpretation Support Tool", challenge: "AI assistant for medical interpreters with real-time terminology and context support.", tech: ["NLP", "Healthcare", "Python"] },
+      ];
+      return (
+        <section id="projects" style={{ padding: "100px 24px", background: C.bgAlt }}>
+          <div style={{ maxWidth: 1060, margin: "0 auto" }}>
+            <FadeIn><SectionLabel>Projects</SectionLabel><SectionTitle>Completed Work</SectionTitle><p style={{ fontSize: 15, color: C.textMuted, marginBottom: 36, marginTop: 12 }}>Select a project to see details.</p></FadeIn>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 20, marginBottom: 64 }}>
+              {completed.map((p, i) => <FadeIn key={i} delay={i * 0.1}><ProjectCard project={p} /></FadeIn>)}
+            </div>
+            <FadeIn>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 12, flexWrap: "wrap" }}>
+                <SectionTitle>AI Applications in Progress</SectionTitle>
+                <span style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.1em", padding: "4px 12px", borderRadius: 20, background: `${C.accent}20`, color: C.accent }}>In Development</span>
+              </div>
+              <p style={{ fontSize: 15, color: C.textMuted, marginBottom: 12 }}>Upcoming projects at the intersection of AI, compliance, and multilingual systems.</p>
+              <p style={{ fontSize: 13, color: C.textLight, marginBottom: 36 }}>Currently building through the <a href="https://suresh-srinivas.github.io/skill-forward/" target="_blank" rel="noopener noreferrer">Skill Forward</a> AI bootcamp — a hands-on program focused on shipping deployed AI solutions with mentorship and public documentation.</p>
+            </FadeIn>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 18 }}>
+              {upcoming.map((p, i) => <FadeIn key={i} delay={i * 0.08}><ProjectCard project={p} muted /></FadeIn>)}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ─── CREATIVE / LED ─── */
+    function Creative() {
+      const awards = [
+        { label: "TEDx Portland", detail: "Radiance Orb featured installation", year: "2017" },
+        { label: "UNESCO, Paris", detail: "International Year of Light Opening Ceremony", year: "2015" },
+        { label: "STEM to STEAM Panel", detail: "Speaker, RAIN, Eugene, OR", year: "2017" },
+        { label: "Just Imagine Award", detail: "Winner, Lucite International", year: "2013" },
+      ];
+      return (
+        <section id="creative" style={{ padding: "100px 24px", background: C.bg }}>
+          <div style={{ maxWidth: 1060, margin: "0 auto" }}>
+            <FadeIn>
+              <SectionLabel>Creative Work</SectionLabel>
+              <SectionTitle>LED Lighting Design</SectionTitle>
+              <p style={{ fontSize: 15, color: C.textMuted, marginBottom: 16, marginTop: 12, maxWidth: 700 }}>
+                From 2013 to 2018, I worked with Light At Play as Contract Designer and Project Manager, directing production and installation of interactive LED sculptures with teams of 10–50 people. This included developing prototypes, sourcing materials, contributing algorithms research, and coordinating logistics for national and international tours.
+              </p>
+              <p style={{ fontSize: 15, color: C.textMuted, marginBottom: 40, maxWidth: 700 }}>
+                This work isn't separate from my data career — it's the same systems thinking in a different medium. Designing an installation means engineering electrical systems, programming light sequences with JavaScript and Arduino, coordinating fabrication across teams, managing budgets and logistics, and thinking about how people will experience the result. My senior thesis at Marlboro College was itself a multimedia immersive performance combining dance, live music, and LED programming.
+              </p>
+            </FadeIn>
+            {/* Photos */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 20, marginBottom: 40 }}>
+              <FadeIn delay={0.1}>
+                <div style={{ borderRadius: 12, overflow: "hidden", border: `1px solid ${C.border}`, background: C.card }}>
+                  <div style={{ width: "100%", aspectRatio: "3/2", overflow: "hidden", background: "#0a0a14" }}>
+                    <img src="led-dome.jpg" alt="LED geodesic dome — the Radiance Orb — with programmable triangular panels" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  </div>
+                  <div style={{ padding: 20 }}>
+                    <h4 style={{ fontFamily: H, fontSize: 16, fontWeight: 600, color: C.text, marginBottom: 6 }}>The Radiance Orb</h4>
+                    <p style={{ fontSize: 13, color: C.textMuted, lineHeight: 1.6 }}>Full-scale geodesic dome with individually programmable triangular LED panels. Featured at TEDx Portland and the UNESCO International Year of Light Opening Ceremony in Paris.</p>
+                  </div>
+                </div>
+              </FadeIn>
+              <FadeIn delay={0.2}>
+                <div style={{ borderRadius: 12, overflow: "hidden", border: `1px solid ${C.border}`, background: C.card }}>
+                  <div style={{ width: "100%", aspectRatio: "3/2", overflow: "hidden", background: "#0a0a14" }}>
+                    <img src="led-detail.jpg" alt="Close-up of LED panel array showing triangular tessellation with rainbow color gradient" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  </div>
+                  <div style={{ padding: 20 }}>
+                    <h4 style={{ fontFamily: H, fontSize: 16, fontWeight: 600, color: C.text, marginBottom: 6 }}>Panel Detail — Color Array</h4>
+                    <p style={{ fontSize: 13, color: C.textMuted, lineHeight: 1.6 }}>Close-up of the triangular tessellation pattern. Each panel is individually addressable using Arduino-based controllers, creating smooth color gradients and programmable patterns.</p>
+                  </div>
+                </div>
+              </FadeIn>
+            </div>
+            {/* Awards */}
+            <FadeIn delay={0.3}>
+              <p style={{ fontSize: 13, fontWeight: 600, color: C.text, marginBottom: 16, letterSpacing: "0.05em", textTransform: "uppercase" }}>Awards & Exhibitions</p>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 12 }}>
+                {awards.map((a, i) => (
+                  <div key={i} style={{ background: C.card, borderRadius: 10, padding: "16px 20px", border: `1px solid ${C.border}` }}>
+                    <p style={{ fontFamily: H, fontSize: 15, fontWeight: 600, color: C.text, marginBottom: 4 }}>{a.label}</p>
+                    <p style={{ fontSize: 13, color: C.textMuted, marginBottom: 4 }}>{a.detail}</p>
+                    <p style={{ fontSize: 12, color: C.textLight }}>{a.year}</p>
+                  </div>
+                ))}
+              </div>
+              <p style={{ fontSize: 13, color: C.textMuted, marginTop: 16 }}>
+                <a href="https://www.youtube.com/watch?v=Wyy08-DGeXQ" target="_blank" rel="noopener noreferrer" style={{ color: C.primary, fontWeight: 500 }}>Watch the Radiance Orb at TEDx Portland →</a>
+              </p>
+            </FadeIn>
+          </div>
+        </section>
+      );
+    }
+
+    /* ─── SKILLS ─── */
+    function Skills() {
+      const cats = [
+        { label: "Programming & Analysis", items: ["Python", "R", "SQL", "PySpark", "HTML/CSS", "JavaScript"] },
+        { label: "Data Platforms & Tools", items: ["Databricks", "Snowflake", "AWS", "Git", "Jupyter", "DataGrip"] },
+        { label: "ML & NLP", items: ["Classification", "NLP", "Neural Networks", "Clustering", "Regression", "Time Series"] },
+        { label: "Data Engineering", items: ["ETL", "EDA", "Data Migration", "Web Scraping", "Cloud Computing"] },
+        { label: "Visualization & Reporting", items: ["Tableau", "Matplotlib", "Dashboards", "Excel", "Google Workspace"] },
+        { label: "Hardware & Creative", items: ["Arduino", "LED Programming", "Prototyping", "Adobe CC"] },
+        { label: "Domains", items: ["Compliance", "GRC", "Fraud Detection", "Campaign Analytics", "Healthcare", "Logistics"] },
+      ];
+      return (
+        <section id="skills" style={{ padding: "100px 24px", background: C.bgAlt }}>
+          <div style={{ maxWidth: 960, margin: "0 auto" }}>
+            <FadeIn><SectionLabel>Skills</SectionLabel><SectionTitle>Technologies & Expertise</SectionTitle></FadeIn>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 20, marginTop: 40 }}>
+              {cats.map((cat, i) => (
+                <FadeIn key={i} delay={i * 0.06}>
+                  <div style={{ background: C.card, borderRadius: 12, padding: 24, border: `1px solid ${C.border}` }}>
+                    <h3 style={{ fontSize: 13, fontWeight: 600, color: C.primary, marginBottom: 14, letterSpacing: "0.04em", textTransform: "uppercase" }}>{cat.label}</h3>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                      {cat.items.map(item => <span key={item} style={{ fontSize: 13, padding: "6px 14px", borderRadius: 20, background: `${C.primary}0D`, color: C.text, fontWeight: 500 }}>{item}</span>)}
+                    </div>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ─── EDUCATION ─── */
+    function Education() {
+      const items = [
+        { degree: "M.S. Data Science", school: "Regis University, Denver, CO", period: "2019 – 2023", note: "Graduate Honors · Coursework in NLP, AI, research, R, Python, statistics, SQL" },
+        { degree: "Data Science Graduate Certificate", school: "Regis University", period: "2019 – 2020", note: null },
+        { degree: "Qualified Oregon Health Care Interpreter", school: "Central Oregon Community College · Spanish/English", period: "2016", note: "Medical terminology in Spanish, culturally sensitive care, clinical exams, HIPAA certification" },
+        { degree: "B.A. Sociology & Choreography", school: "Marlboro College, Marlboro, VT", period: "2006 – 2011", note: "Summa Cum Laude · Senior thesis: multimedia immersive performance with dance, live music, and LED programming · Wilderness First Responder · Outdoor Program leadership" },
+        { degree: "Applied Plotting, Charting & Data Representation in Python", school: "Coursera", period: "2018", note: null },
+        { degree: "Introduction to Data Science in Python", school: "Coursera", period: "2018", note: null },
+      ];
+      return (
+        <section id="education" style={{ padding: "100px 24px", background: C.bg }}>
+          <div style={{ maxWidth: 760, margin: "0 auto" }}>
+            <FadeIn><SectionLabel>Education & Certifications</SectionLabel><SectionTitle>Academic Background</SectionTitle></FadeIn>
+            <div style={{ display: "flex", flexDirection: "column", gap: 0, marginTop: 40 }}>
+              {items.map((item, i) => (
+                <FadeIn key={i} delay={i * 0.06}>
+                  <div style={{ padding: "20px 0", borderBottom: i < items.length - 1 ? `1px solid ${C.border}` : "none" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 8 }}>
+                      <div>
+                        <h3 style={{ fontFamily: H, fontSize: 17, fontWeight: 600, color: C.text, margin: "0 0 4px" }}>{item.degree}</h3>
+                        <p style={{ fontSize: 14, color: C.textMuted, margin: 0 }}>{item.school}</p>
+                      </div>
+                      <span style={{ fontSize: 13, color: C.textLight }}>{item.period}</span>
+                    </div>
+                    {item.note && <p style={{ fontSize: 13, color: C.textLight, lineHeight: 1.6, marginTop: 8 }}>{item.note}</p>}
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ─── CONTACT ─── */
+    function Contact() {
+      const [form, setForm] = useState({ name: "", email: "", message: "" });
+      const [sent, setSent] = useState(false);
+      const handleSubmit = () => { if (form.name && form.email && form.message) setSent(true); };
+      return (
+        <section id="contact" style={{ padding: "100px 24px", background: C.bgAlt }}>
+          <div style={{ maxWidth: 700, margin: "0 auto" }}>
+            <FadeIn><SectionLabel>Contact</SectionLabel><SectionTitle>Let's Connect</SectionTitle><p style={{ fontSize: 15, color: C.textMuted, marginBottom: 36, marginTop: 12 }}>Interested in working together? I'd love to hear from you.</p></FadeIn>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 36 }}>
+              <FadeIn delay={0.1}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+                  {[
+                    { icon: "M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z", label: "" },
+                    { icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z", label: "" },
+                    { icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z", label: "Portland, OR" },
+                  ].map((c, i) => (
+                    <div key={i} style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                      <div style={{ width: 36, height: 36, borderRadius: 8, background: `${C.primary}12`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={C.primary} strokeWidth="1.8"><path d={c.icon} /></svg>
+                      </div>
+                      <span style={{ fontSize: 14, color: C.text }}>{c.label}</span>
+                    </div>
+                  ))}
+                  <div style={{ display: "flex", gap: 12, marginTop: 8 }}>
+                    {["LinkedIn", "GitHub"].map(p => <a key={p} href="#" style={{ fontSize: 13, fontWeight: 500, color: C.primary, textDecoration: "none", padding: "8px 18px", borderRadius: 8, border: `1px solid ${C.primary}33` }}>{p}</a>)}
+                  </div>
+                </div>
+              </FadeIn>
+              <FadeIn delay={0.2}>
+                {sent ? (
+                  <div style={{ background: `${C.primary}10`, borderRadius: 12, padding: 32, textAlign: "center" }}>
+                    <p style={{ fontFamily: H, fontSize: 20, color: C.primary, fontWeight: 600, marginBottom: 8 }}>Message Sent!</p>
+                    <p style={{ fontSize: 14, color: C.textMuted }}>Thank you for reaching out. I'll get back to you soon.</p>
+                  </div>
+                ) : (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+                    <input type="text" placeholder="Your Name" value={form.name} onChange={e => setForm({...form, name: e.target.value})} style={{ fontSize: 14, padding: "12px 16px", borderRadius: 8, border: `1px solid ${C.border}`, background: C.card, color: C.text }} />
+                    <input type="email" placeholder="Your Email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} style={{ fontSize: 14, padding: "12px 16px", borderRadius: 8, border: `1px solid ${C.border}`, background: C.card, color: C.text }} />
+                    <textarea placeholder="Your Message" rows={4} value={form.message} onChange={e => setForm({...form, message: e.target.value})} style={{ fontSize: 14, padding: "12px 16px", borderRadius: 8, border: `1px solid ${C.border}`, background: C.card, color: C.text, resize: "vertical", fontFamily: "'DM Sans', sans-serif" }} />
+                    <button onClick={handleSubmit} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, fontWeight: 600, padding: "13px 28px", borderRadius: 8, border: "none", background: C.primary, color: "#fff", cursor: "pointer" }}>Send Message</button>
+                  </div>
+                )}
+              </FadeIn>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Footer() {
+      return <footer style={{ padding: "32px 24px", background: C.text, textAlign: "center" }}><p style={{ fontSize: 13, color: `${C.bg}88` }}>© 2026 Kenyon Acton · Portland, OR</p></footer>;
+    }
+
+    function App() {
+      const [active, setActive] = useState("");
+      useEffect(() => {
+        const ids = ["about", "experience", "projects", "creative", "skills", "education", "contact"];
+        const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setActive(e.target.id); }), { rootMargin: "-40% 0px -40% 0px" });
+        ids.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
+        return () => obs.disconnect();
+      }, []);
+      return (
+        <div style={{ background: C.bg, minHeight: "100vh" }}>
+          <Nav active={active} /><Hero /><About /><Experience /><Projects /><Creative /><Skills /><Education /><Contact /><Footer />
+        </div>
+      );
+    }
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
