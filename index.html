@@ -108,7 +108,7 @@
                   See My Work
                 </button>
                 <button onClick={() => go("contact")}
-                  style={{ fontFamily:"'DM Sans'", fontSize:14, fontWeight:600, padding:"12px 28px", borderRadius:30, cursor:"pointer", background:C.aqua, color:C.deepTeal, border:"none", letterSpacing:"0.02em" }}>
+                  style={{ fontFamily:"'DM Sans'", fontSize:14, fontWeight:600, padding:"12px 28px", borderRadius:30, cursor:"pointer", background:C.coral, color:C.cream, border:"none", letterSpacing:"0.02em" }}>
                   Get in Touch
                 </button>
               </div>
@@ -124,7 +124,7 @@
         {
           emoji: "◈",
           title: "Data Engineering & Analytics",
-          body: "I build data infrastructure that supports decision-making at scale. My work includes governance protocols, machine learning pipelines, and documentation standards designed for cross-functional teams.",
+          body: "I build data infrastructure that supports decision-making at scale. My work covers data governance, ETL pipelines, and machine learning models — with an emphasis on documentation and standards that hold up across cross-functional teams.",
           tags: ["Python", "SQL", "Databricks", "PySpark", "Machine Learning", "AWS"],
         },
         {
@@ -136,7 +136,7 @@
         {
           emoji: "◬",
           title: "Creative Technology & Leadership",
-          body: "I direct technical teams from concept through delivery. At Light At Play, I led production of interactive LED installations with teams of 10–50, contributing algorithms research and design for work presented at TEDx Portland and the UNESCO International Year of Light, Paris.",
+          body: "I direct technical teams from concept through delivery. At Light At Play, I led production of interactive LED installations with teams of 10–50, contributing algorithms research for work presented at TEDx Portland and the UNESCO International Year of Light, Paris.",
           tags: ["Team Leadership", "Project Management", "JavaScript", "Arduino", "Creative Direction"],
         },
       ];
@@ -159,7 +159,7 @@
                       <p style={{ fontSize:14, color:C.creamMuted, lineHeight:1.75, marginBottom:16 }}>{p.body}</p>
                       <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
                         {p.tags.map(t => (
-                          <span key={t} style={{ fontSize:12, fontWeight:500, padding:"5px 12px", borderRadius:20, background:`${C.coral}22`, color:C.coralLight }}>
+                          <span key={t} style={{ fontSize:11, fontWeight:500, padding:"4px 11px", borderRadius:20, background:`${C.coral}22`, color:C.coralLight }}>
                             {t}
                           </span>
                         ))}
@@ -209,7 +209,7 @@
                   </div>
                 ))}
                 <a href="https://www.youtube.com/watch?v=Wyy08-DGeXQ" target="_blank" rel="noopener noreferrer"
-                  style={{ fontSize:13, fontWeight:500, color:C.coral }}>
+                  style={{ display:"inline-block", fontFamily:"'DM Sans'", fontSize:14, fontWeight:600, padding:"12px 28px", borderRadius:30, background:C.coral, color:C.cream, textDecoration:"none", letterSpacing:"0.02em" }}>
                   Watch at TEDx →
                 </a>
               </div>
@@ -269,7 +269,7 @@
                   { label: "GitHub", href: "https://github.com/kenyonacton" }
                 ].map(p => (
                   <a key={p.label} href={p.href} target="_blank" rel="noopener noreferrer"
-                    style={{ fontSize:15, fontWeight:600, color:C.coral, padding:"12px 28px", borderRadius:30, border:`2px solid ${C.coral}55`, textDecoration:"none" }}>
+                    style={{ display:"inline-block", fontFamily:"'DM Sans'", fontSize:14, fontWeight:600, padding:"12px 28px", borderRadius:30, background:C.coral, color:C.cream, textDecoration:"none", letterSpacing:"0.02em" }}>
                     {p.label}
                   </a>
                 ))}
