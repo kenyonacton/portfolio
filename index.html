@@ -96,7 +96,7 @@
             </FadeIn>
             <FadeIn delay={0.3}>
               <p style={{ fontSize:"clamp(15px,2.2vw,17px)", color:C.creamMuted, lineHeight:1.8, maxWidth:560, marginBottom:36 }}>
-                I connect things other people keep separate — regulatory systems, multilingual data, creative technology, and cross-functional teams. From directing LED installation tours at UNESCO to analyzing fraud across 20+ language datasets, I bring systems thinking to every problem.
+                I connect things other people keep separate — regulatory systems, multilingual data, creative technology, and cross-functional teams. From presenting LED installations at the UNESCO International Year of Light to analyzing fraud across 20+ language datasets, I bring systems thinking to every problem.
               </p>
             </FadeIn>
             <FadeIn delay={0.4}>
@@ -134,7 +134,7 @@
         {
           emoji: "◬",
           title: "Creative Technology",
-          body: "Five years at Light At Play directing production of interactive LED sculptures. Managed teams of 10–50, coordinated international tours, programmed light algorithms. Featured at TEDx Portland and UNESCO Paris.",
+          body: "Five years at Light At Play directing production of interactive LED sculptures. Managed teams of 10–50, coordinated international tours, programmed light algorithms. Presented at TEDx Portland and the UNESCO International Year of Light.",
           tags: ["JavaScript", "Arduino", "Project Management", "LED Design"],
         },
       ];
@@ -200,7 +200,7 @@
             </div>
             <FadeIn delay={0.3}>
               <div style={{ display:"flex", flexWrap:"wrap", gap:10, alignItems:"center" }}>
-                {[{ place:"TEDx Portland", year:"2017" }, { place:"UNESCO, Paris", year:"2015" }, { place:"Just Imagine Award", year:"2013" }].map((a,i) => (
+                {[{ place:"TEDx Portland", year:"2017" }, { place:"Int'l Year of Light, UNESCO", year:"2015" }, { place:"Just Imagine Award", year:"2013" }].map((a,i) => (
                   <div key={i} style={{ background:C.cardBg, borderRadius:30, padding:"8px 18px", border:`1px solid ${C.cardBorder}`, display:"flex", gap:8, alignItems:"baseline" }}>
                     <span style={{ fontFamily:H, fontSize:13, fontWeight:600, color:C.cream }}>{a.place}</span>
                     <span style={{ fontSize:12, color:C.creamFaint }}>{a.year}</span>
@@ -261,21 +261,13 @@
                 Let's Talk
               </h2>
               <p style={{ fontSize:15, color:C.creamMuted, marginBottom:32 }}>I'd love to hear from you.</p>
-              <div style={{ display:"flex", flexDirection:"column", alignItems:"center", gap:14 }}>
-                <a href="mailto:"
-                  style={{ fontSize:16, fontWeight:500, color:C.cream, background:C.cardBg, padding:"12px 28px", borderRadius:30, border:`1px solid ${C.cardBorder}` }}>
-                 
-                </a>
-                <a href="tel:" style={{ fontSize:14, color:C.creamMuted }}></a>
-                <p style={{ fontSize:13, color:C.creamFaint }}>Portland, OR</p>
-                <div style={{ display:"flex", gap:10, marginTop:6 }}>
-                  {["LinkedIn", "GitHub"].map(p => (
-                    <a key={p} href="#"
-                      style={{ fontSize:13, fontWeight:600, color:C.coral, padding:"8px 20px", borderRadius:24, border:`2px solid ${C.coral}55` }}>
-                      {p}
-                    </a>
-                  ))}
-                </div>
+              <div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
+                {["LinkedIn", "GitHub"].map(p => (
+                  <a key={p} href="#"
+                    style={{ fontSize:15, fontWeight:600, color:C.coral, padding:"12px 28px", borderRadius:30, border:`2px solid ${C.coral}55`, textDecoration:"none" }}>
+                    {p}
+                  </a>
+                ))}
               </div>
             </FadeIn>
           </div>
