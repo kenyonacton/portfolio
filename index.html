@@ -91,12 +91,12 @@
             </FadeIn>
             <FadeIn delay={0.2}>
               <p style={{ fontSize:14, color:C.aqua, fontWeight:500, letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:22 }}>
-                Data Scientist · Systems Thinker · Multilingual Analyst
+                Data Scientist · Compliance Analyst · Multilingual Professional
               </p>
             </FadeIn>
             <FadeIn delay={0.3}>
               <p style={{ fontSize:"clamp(15px,2.2vw,17px)", color:C.creamMuted, lineHeight:1.8, maxWidth:560, marginBottom:36 }}>
-                I build solutions at the intersection of compliance, data engineering, and multilingual systems. From leading investigative analysis across 20+ language datasets to directing LED installations at the UNESCO International Year of Light, I bring systems thinking and cross-functional leadership to every problem.
+                Data scientist with a background in compliance analytics, multilingual research, and cross-functional leadership. I've built data pipelines and governance frameworks at a global compliance firm, led investigative analysis across 20+ language datasets, and directed large-scale creative installations seen at TEDx and the UNESCO International Year of Light.
               </p>
             </FadeIn>
             <FadeIn delay={0.4}>
@@ -106,7 +106,7 @@
                   See My Work
                 </button>
                 <button onClick={() => go("contact")}
-                  style={{ fontFamily:"'DM Sans'", fontSize:14, fontWeight:600, padding:"12px 28px", borderRadius:30, cursor:"pointer", background:"transparent", color:C.cream, border:`2px solid ${C.cream}44`, letterSpacing:"0.02em" }}>
+                  style={{ fontFamily:"'DM Sans'", fontSize:14, fontWeight:600, padding:"12px 28px", borderRadius:30, cursor:"pointer", background:C.aqua, color:C.deepTeal, border:"none", letterSpacing:"0.02em" }}>
                   Get in Touch
                 </button>
               </div>
@@ -128,8 +128,8 @@
         {
           emoji: "◎",
           title: "Multilingual Compliance & Research",
-          body: "Led investigative analysis and compliance reporting across 20+ language datasets. Updated regulatory documentation for global clients as legislative frameworks changed. Built and implemented translation tools that scaled multilingual workflows. Qualified Oregon Health Care Interpreter trained in medical terminology and HIPAA compliance.",
-          tags: ["6 Languages", "Healthcare Interpreter", "Compliance Research"],
+          body: "Led investigative analysis and compliance reporting across 20+ language datasets at LegitScript. Updated regulatory documentation for global clients as legislative frameworks evolved. Built translation tools that scaled multilingual workflows. Bilingual professional (Spanish/English) with deep experience in cross-cultural communication and research.",
+          tags: ["Spanish / English", "6 Languages", "Compliance Research", "Bilingual"],
         },
         {
           emoji: "◬",
@@ -234,7 +234,7 @@
                   bootcamp — shipping deployed solutions with public demos and documentation.
                 </p>
                 <p style={{ fontSize:15, color:C.creamMuted, lineHeight:1.8, marginBottom:28 }}>
-                  M.S. Data Science, Regis University · B.A. Marlboro College. Looking for roles where systems thinking and multilingual capability create real value.
+                  M.S. Data Science, Regis University · B.A. Marlboro College. Open to roles in GRC, data governance, compliance analytics, and international programs — wherever multilingual expertise and analytical depth drive measurable impact.
                 </p>
                 <div style={{ display:"flex", flexWrap:"wrap", gap:10, justifyContent:"center" }}>
                   {["GRC & Compliance", "Data Governance", "International Programs", "AI Applications"].map(t => (
@@ -262,10 +262,13 @@
               </h2>
               <p style={{ fontSize:15, color:C.creamMuted, marginBottom:32 }}>I'd love to hear from you.</p>
               <div style={{ display:"flex", gap:12, justifyContent:"center", flexWrap:"wrap" }}>
-                {["LinkedIn", "GitHub"].map(p => (
-                  <a key={p} href="#"
+                {[
+                  { label: "LinkedIn", href: "https://www.linkedin.com/in/kenyonacton/" },
+                  { label: "GitHub", href: "https://github.com/kenyonacton" }
+                ].map(p => (
+                  <a key={p.label} href={p.href} target="_blank" rel="noopener noreferrer"
                     style={{ fontSize:15, fontWeight:600, color:C.coral, padding:"12px 28px", borderRadius:30, border:`2px solid ${C.coral}55`, textDecoration:"none" }}>
-                    {p}
+                    {p.label}
                   </a>
                 ))}
               </div>
