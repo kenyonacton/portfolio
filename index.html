@@ -75,14 +75,16 @@
       const go = id => document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
       return (
         <section style={{ background: C.deepTeal, padding: "100px 24px 40px", position: "relative", overflow: "hidden" }}>
-          {/* Subtle decorative circles inspired by the flyer's organic shapes */}
-          <div style={{ position:"absolute", top:-80, right:-80, width:320, height:320, borderRadius:"50%", background:`${C.coral}10`, pointerEvents:"none" }} />
-          <div style={{ position:"absolute", bottom:20, left:-60, width:200, height:200, borderRadius:"50%", background:`${C.aqua}08`, pointerEvents:"none" }} />
+          {/* Decorative bubbles inspired by the flyer's underwater feel */}
+          <div style={{ position:"absolute", top:-80, right:-80, width:320, height:320, borderRadius:"50%", background:`${C.aqua}28`, pointerEvents:"none" }} />
+          <div style={{ position:"absolute", bottom:20, left:-60, width:200, height:200, borderRadius:"50%", background:`${C.aqua}1F`, pointerEvents:"none" }} />
+          <div style={{ position:"absolute", top:60, left:"15%", width:60, height:60, borderRadius:"50%", background:`${C.aqua}22`, pointerEvents:"none" }} />
+          <div style={{ position:"absolute", bottom:80, right:"18%", width:36, height:36, borderRadius:"50%", background:`${C.aqua}33`, pointerEvents:"none" }} />
           <div style={{ maxWidth: 740, margin: "0 auto", display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center", position:"relative", zIndex:1 }}>
             <FadeIn>
               <img src="headshot.jpg" alt="Kenyon Acton"
                 style={{ width:156, height:156, borderRadius:"50%", objectFit:"cover", objectPosition:"center top",
-                  border:`4px solid ${C.coral}`, boxShadow:`0 0 0 8px ${C.coral}22`, marginBottom:28 }} />
+                  border:`4px solid ${C.aqua}`, boxShadow:`0 0 0 8px ${C.aqua}33`, marginBottom:28 }} />
             </FadeIn>
             <FadeIn delay={0.1}>
               <h1 style={{ fontFamily:H, fontSize:"clamp(36px,6vw,60px)", fontWeight:700, color:C.cream, lineHeight:1.1, marginBottom:14 }}>
@@ -281,7 +283,7 @@
     function Footer() {
       return (
         <footer style={{ padding:"24px", background:"#163D4A", textAlign:"center" }}>
-          <p style={{ fontSize:12, color:`${C.creamFaint}88` }}>© 2026 Kenyon Acton · Portland, OR</p>
+          <p style={{ fontSize:12, color:`${C.creamFaint}88` }}>© 2026 Kenyon Acton</p>
         </footer>
       );
     }
