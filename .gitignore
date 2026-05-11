@@ -1,0 +1,8 @@
+# Local-only design reference images (no licensing for redistribution)
+inspiration/
+
+# Local-only project material (kept off public deploy)
+private/
+
+# macOS
+.DS_Store
