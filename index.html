@@ -174,9 +174,104 @@
       const disabledBtn = { display:"inline-block", fontFamily:"'DM Sans'", fontSize:14, fontWeight:600, padding:"12px 28px", borderRadius:30, background:"transparent", color:`${C.creamFaint}99`, letterSpacing:"0.02em", border:`1px dashed ${C.creamFaint}55`, cursor:"not-allowed" };
       const tagPill = { fontSize:11, fontWeight:500, padding:"4px 11px", borderRadius:20, background:C.chipTeal, color:C.cream };
 
+      // Wonder Practices — local helpers (kept inline per the card's design)
+      const wpChipStyle = (bg, color) => ({ background:bg, color:color, padding:"4px 8px", borderRadius:999, fontFamily:"DM Sans, sans-serif", fontSize:10, fontWeight:500, display:"inline-flex", alignItems:"center", gap:4 });
+      const wpCellStyle = { background:"#1E3D40", padding:12, borderRadius:8, border:"0.5px solid #4A7178", minHeight:80 };
+      const wpCellLabel = { fontFamily:"DM Sans, sans-serif", fontSize:9, color:"#93B5B0", letterSpacing:"0.1em", textTransform:"uppercase", marginBottom:8, fontWeight:500 };
+      const WpChips = () => (
+        <div style={{ display:"flex", flexWrap:"wrap", gap:5 }}>
+          <span style={wpChipStyle("#3D5878", "#D5DEEE")}>
+            <svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" fill="#C5D0E5" />
+            </svg>
+            Quiet
+          </span>
+          <span style={wpChipStyle("#2A8E7E", "#D5F0E5")}>
+            <svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 14 Q 7 8, 11 14 T 19 14" stroke="#C5E5D8" strokeWidth="2.5" strokeLinecap="round" fill="none" />
+            </svg>
+            Active
+          </span>
+          <span style={wpChipStyle("#3D3A6E", "#D5D3E8")}>
+            <svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 21s-7-4.5-9-9c-1.5-3.5 1-7.5 4.5-7.5 1.8 0 3.3 0.9 4.5 2.5 1.2-1.6 2.7-2.5 4.5-2.5 3.5 0 6 4 4.5 7.5-2 4.5-9 9-9 9z" stroke="#C5C3E0" strokeWidth="1.8" fill="none" strokeLinejoin="round" />
+            </svg>
+            Body
+          </span>
+          <span style={wpChipStyle("#5B4D72", "#E2D8EC")}>
+            <svg width="10" height="10" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="8.5" fill="none" stroke="#D8CCE5" strokeWidth="2" />
+            </svg>
+            Tender
+          </span>
+        </div>
+      );
+
       return (
         <section id="work" style={{ background:C.deepTeal, padding:"60px 24px 20px" }}>
           <div style={{ maxWidth:960, margin:"0 auto" }}>
+            {/* Wonder Practices */}
+            <FadeIn delay={0.1}>
+              <div style={{ background:C.cardBg, borderRadius:16, padding:32, border:`0.5px solid ${C.cardBorder}`, marginBottom:32 }}>
+                {/* Inline SVG filter defs for color vision simulations */}
+                <svg width="0" height="0" style={{ position:"absolute" }} aria-hidden="true">
+                  <defs>
+                    <filter id="wp-deuteranopia">
+                      <feColorMatrix type="matrix" values="0.367 0.861 -0.228 0 0  0.280 0.673 0.047 0 0  -0.012 0.043 0.969 0 0  0 0 0 1 0" />
+                    </filter>
+                    <filter id="wp-protanopia">
+                      <feColorMatrix type="matrix" values="0.152 1.053 -0.205 0 0  0.115 0.786 0.099 0 0  -0.004 -0.048 1.052 0 0  0 0 0 1 0" />
+                    </filter>
+                  </defs>
+                </svg>
+                <h3 style={{ fontFamily:"Outfit, sans-serif", fontSize:22, fontWeight:600, color:C.coral, margin:"0 0 14px", letterSpacing:"-0.01em" }}>
+                  Wonder Practices
+                </h3>
+                <div style={{ display:"flex", flexWrap:"wrap", gap:8, marginBottom:18 }}>
+                  {["Accessibility", "Research synthesis", "Design system"].map((tag) => (
+                    <span key={tag} style={{ background:C.chipTeal, color:C.cream, padding:"5px 14px", borderRadius:20, fontFamily:"DM Sans, sans-serif", fontSize:12, fontWeight:500, letterSpacing:"0.02em" }}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <p style={{ fontFamily:"DM Sans, sans-serif", fontSize:14, lineHeight:1.75, color:C.creamFaint, margin:"0 0 24px" }}>
+                  A library of evidence-backed practices for nervous system regulation and communication.
+                </p>
+                <div style={{ marginBottom:28 }}>
+                  <span style={{ background:"transparent", color:C.creamFaint, padding:"10px 22px", borderRadius:30, fontFamily:"DM Sans, sans-serif", fontSize:14, fontWeight:600, border:`1px dashed ${C.cardBorder}`, display:"inline-block", letterSpacing:"0.02em" }}>
+                    Coming soon
+                  </span>
+                </div>
+                <div style={{ height:0.5, background:C.cardBorder, margin:"0 -32px 24px" }} />
+                <div>
+                  <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8 }}>
+                    <div style={wpCellStyle}>
+                      <div style={wpCellLabel}>Trichromatic</div>
+                      <WpChips />
+                    </div>
+                    <div style={wpCellStyle}>
+                      <div style={wpCellLabel}>Deuteranopia</div>
+                      <div style={{ filter:"url(#wp-deuteranopia)" }}>
+                        <WpChips />
+                      </div>
+                    </div>
+                    <div style={wpCellStyle}>
+                      <div style={wpCellLabel}>Protanopia</div>
+                      <div style={{ filter:"url(#wp-protanopia)" }}>
+                        <WpChips />
+                      </div>
+                    </div>
+                    <div style={wpCellStyle}>
+                      <div style={wpCellLabel}>Achromatopsia</div>
+                      <div style={{ filter:"grayscale(100%)" }}>
+                        <WpChips />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+
             {/* LED Design Projects with Light At Play */}
             <FadeIn delay={0.2}>
               <div style={{ background:C.cardBg, borderRadius:16, padding:32 }}>
