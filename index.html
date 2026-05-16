@@ -203,6 +203,7 @@
         trichromatic:  { quiet:"#3D5878", active:"#2A8E7E", bodyIntense:"#3D3A6E", tender:"#5B4D72" },
         deuteranopia:  { quiet:"#475778", active:"#7E7E72", bodyIntense:"#3F3B6E", tender:"#564D72" },
         protanopia:    { quiet:"#4A5778", active:"#878375", bodyIntense:"#393A6E", tender:"#514D72" },
+        tritanopia:    { quiet:"#305F62", active:"#139489", bodyIntense:"#34424A", tender:"#585158" },
         achromatopsia: { quiet:"#545454", active:"#6E6E6E", bodyIntense:"#404040", tender:"#585858" },
       };
       const wpLabels = [
@@ -238,9 +239,9 @@
         </svg>
       );
       const wpVisionCells = [
-        { key:"trichromatic",  title:"Trichromatic" },
         { key:"deuteranopia",  title:"Deuteranopia" },
         { key:"protanopia",    title:"Protanopia" },
+        { key:"tritanopia",    title:"Tritanopia" },
         { key:"achromatopsia", title:"Achromatopsia" },
       ];
 
@@ -270,6 +271,9 @@
                 </div>
                 <div style={{ height:0.5, background:C.cardBorder, margin:"0 -32px 24px" }} />
                 <div style={{ background:"#163D4A", borderRadius:16, padding:"14px 14px 10px" }}>
+                  <div style={{ fontFamily:wpHeroFont, fontSize:10.5, color:"#93B5B0", letterSpacing:"0.08em", textTransform:"uppercase", marginBottom:6 }}>
+                    Trichromatic
+                  </div>
                   <WpHeroScape />
                 </div>
                 <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:12, marginTop:14 }}>
